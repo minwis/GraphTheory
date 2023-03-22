@@ -27,6 +27,20 @@ public class LinkedList {
         }
     }
 
+    public static void removeNode(node Node, int index, int removeIndex) {
+        if ( Node.equals(head) && index == removeIndex ) {
+            head = head.next;
+        }
+        else if ( index == removeIndex ) {
+            Node.next = Node.next.next;
+        }
+
+        if ( Node.next != null ) {
+            removeNode(Node.next, index + 1, removeIndex);
+        }
+
+    }
+
     public static void addNode(node Node, node targetNode) {
         if ( Node.next == null ) {
             Node.next = targetNode;
@@ -36,7 +50,7 @@ public class LinkedList {
         }
     }
 
-    public static void addNode(node Node, node targetNode, int index, int targetIndex) {
+    public static void addNode(node Node, node targetNode, int index, int targetIndex) { //the index starts with 0.
         if ( index+1 == targetIndex ) {
             targetNode.next = Node.next;
             Node.next = targetNode;
@@ -72,6 +86,7 @@ public class LinkedList {
             addNode(head, new node(i));
         }
 
+        //addNode(head, new node(4), 0, 4);
         for ( int i = 1; i <= 10; i++ ) {
             removeNode(head, i);
 
