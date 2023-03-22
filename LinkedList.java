@@ -2,6 +2,17 @@ import java.util.*;
 
 public class LinkedList {
 
+    public static class node {
+
+        public int value;
+        public node next;
+
+        public node(int value) {
+            this.value = value;
+            next = null;
+        }
+    }
+
     public static node head = new node(1);
 
     public static void removeNode(node Node, int removeValue) {
@@ -16,10 +27,28 @@ public class LinkedList {
         }
     }
 
-    public static void main(String args[]) {
-        //node start = new node
+    public static void addNode(node Node, node targetNode) {
+        if ( Node.next == null ) {
+            Node.next = targetNode;
+        }
+        else {
+            addNode(Node.next, targetNode);
+        }
+    }
 
-        node two = new node(2);
+    public static void addNode(node Node, node targetNode, int index, int targetIndex) {
+        if ( index+1 == targetIndex ) {
+            targetNode.next = Node.next;
+            Node.next = targetNode;
+        }
+        else {
+            addNode(Node.next, targetNode, index + 1, targetIndex);
+        }
+    }
+
+    public static void main(String args[]) {
+
+        /*node two = new node(2);
         node three = new node(3);
         node four = new node(4);
         node five = new node(5);
@@ -37,10 +66,11 @@ public class LinkedList {
         six.next = seven;
         seven.next = eight;
         eight.next = nine;
-        nine.next = ten;
+        nine.next = ten;*/
 
-        /*Scanner sc = new Scanner(System.in);
-        int removeValue = sc.nextInt();*/
+        for ( int i = 2; i <= 10; i++ ) {
+            addNode(head, new node(i));
+        }
 
         for ( int i = 1; i <= 10; i++ ) {
             removeNode(head, i);
@@ -50,7 +80,7 @@ public class LinkedList {
                 try {
                     System.out.print(N.value + " ");
                 } catch ( NullPointerException e ) {
-                    System.out.println("All Nodes are removed!");
+                    System.out.println("All Nodes are successfully removed!");
                     break;
                 }
 
@@ -64,7 +94,10 @@ public class LinkedList {
 
             System.out.println();
         }
-        /*removeNode(head, 1);
+        /*
+        Scanner sc = new Scanner(System.in);
+        int removeValue = sc.nextInt();
+        removeNode(head, 1);
         removeNode(head, 2);
 
         node N = head;
