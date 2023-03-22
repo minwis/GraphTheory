@@ -1,10 +1,10 @@
 public class node {
 
-    public int value = 0;
-    public node pointer = null;
+    public int value;
+    public node next;
 
     public node(int value) {
         this.value = value;
-
+        next = null;
     }
 }
