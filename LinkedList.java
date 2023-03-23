@@ -19,14 +19,12 @@ public class LinkedList {
         if ( Node.equals(head) && Node.value == removeValue ) {
             head = head.next;
         }
-        else if ( Node.next != null && Node.next.value == removeValue ) {
+        else if ( Node.next.value == removeValue ) {
             Node.next = Node.next.next;
+        }else {
+            removeNode(Node.next, removeValue);
         }
 
-        if ( Node.next == null ) {
-            return;
-        }
-        removeNode(Node.next, removeValue);
     }
 
     public static void removeNode(node Node, int index, int removeIndex) {
