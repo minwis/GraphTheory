@@ -16,97 +16,111 @@ public class LinkedList {
     public static node head = new node(1);
 
     public static void removeNode(node Node, int removeValue) {
-        if ( Node.equals(head) && Node.value == removeValue ) {
-            head = head.next;
-        }
-        else {
+
+        while ( true ) {
+            if ( Node.equals(head) && Node.value == removeValue ) {
+                head = head.next;
+            }
             while ( Node.next != null && Node.next.value == removeValue ) {
                 Node.next = Node.next.next;
             }
-        }
 
-        if ( Node.next != null ) {
-            removeNode(Node.next, removeValue);
+            if ( Node.next != null ) {
+                Node = Node.next;
+            }
+            else {
+                return;
+            }
         }
 
     }
 
     public static void removeNode(node Node, int index, int removeIndex) {
-        if ( Node.equals(head) && index == removeIndex ) {
-            head = head.next;
-        }
-        else if ( index == removeIndex ) {
-            Node.next = Node.next.next;
-        }else {
-            removeNode(Node.next, index + 1, removeIndex);
+
+        while ( true ) {
+            if ( Node.equals(head) && index == removeIndex ) {
+                head = head.next;
+            }
+
+            if ( index + 1 == removeIndex ) {
+                Node.next = Node.next.next;
+            }
+
+            if ( Node.next != null ) {
+                Node = Node.next;
+                index++;
+            }
+            else {
+                return;
+            }
         }
 
     }
 
     public static void addNode(node Node, node targetNode) {
-        if ( Node.next == null ) {
-            Node.next = targetNode;
-        }
-        else {
-            addNode(Node.next, targetNode);
+        while ( true ) {
+            if ( Node.next == null ) {
+                Node.next = targetNode;
+                return;
+            }
+            else {
+                Node = Node.next;
+            }
         }
     }
 
     public static void addNode(node Node, node targetNode, int index, int targetIndex) {
-        if ( index+1 == targetIndex ) {
-            targetNode.next = Node.next;
-            Node.next = targetNode;
-        }
-        else {
-            addNode(Node.next, targetNode, index + 1, targetIndex);
+
+        while ( true ) {
+            if ( Node.equals(head) && index == targetIndex ) {
+                targetNode.next = head;
+                head = targetNode;
+                return;
+            }
+
+            if ( index + 1 == targetIndex ) {
+                targetNode.next = Node.next;
+                Node.next = targetNode;
+            }
+
+            if ( Node.next != null ) {
+                Node = Node.next;
+                index++;
+            }
+            else {
+                return;
+            }
         }
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 
-        for ( int i = 2; i <= 10; i++ ) {
-            addNode(head, new node(i));
-        }
+        addNode(head, new node(2));
+        addNode(head, new node(2));
+        addNode(head, new node(4));
+        addNode(head, new node(2));
+        addNode(head, new node(5), 0, 0);
 
-        addNode(head, new node(10), 0, 10);
-        //removeNode(head, 10);
-
-        //for ( int i = 1; i <= 10; i++ ) {
-            removeNode(head, 10);
-
-            node N = head;
-            while (true) {
-                try {
-                    System.out.print(N.value + " ");
-                } catch ( NullPointerException e ) {
-                    System.out.println("All Nodes are successfully removed!");
-                    break;
-                }
-
-                if ( N.next == null ) {
-                    break;
-                }
-                else {
-                    N = N.next;
-                }
-            }
-
-            System.out.println();
-        //}
-
-        /*Scanner sc = new Scanner(System.in);
-        int removeValue = sc.nextInt();
-        removeNode(head, removeValue);
+        //removeNode(head, 0, 0);
 
         node N = head;
         while (true) {
-            System.out.print(N.value + " ");
+            try {
+                System.out.print(N.value + " ");
+            } catch ( NullPointerException e ) {
+                System.out.println("All Nodes are successfully removed!");
+                break;
+            }
+
             if ( N.next == null ) {
                 break;
             }
             else {
                 N = N.next;
             }
-        }*/
+        }
+
+        System.out.println();
+
     }
 }
