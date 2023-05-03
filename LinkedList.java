@@ -1,17 +1,5 @@
-import java.util.*;
 
 public class LinkedList {
-
-    public static class node {
-
-        public int value;
-        public node next;
-
-        public node(int value) {
-            this.value = value;
-            next = null;
-        }
-    }
 
     public static node head = new node(1);
 
