@@ -1,41 +1,35 @@
-import java.util.*;
+public class DFS {
 
-public class BFS {
-
-    //public static List<node> Graph = new ArrayList<node>();
-    private static int size = 9;
+    public static int size = 9;
     private static int[][] graph = new int[size][size];
     private static boolean ProgramTerminate = false;
     private static boolean[] IsVisited = new boolean[size]; //check if the node whose number is index is visited
 
     public static void main(String[] args) {
         initialize();
-        BFSAlgorithm(0, 6);
+
+        DFSAlgorithm(0, 6);
     }
 
-    public static void BFSAlgorithm(int CurrentNode, int Target) {
-        IsVisited[CurrentNode] = true;
-        for ( int i = 0; i < size; i++ ) {
-            if (graph[CurrentNode][i] != 0 && i == Target) {
-                ProgramTerminate = true;
-                System.out.println(Target);
-                System.out.println(CurrentNode);
-                return;
-            }
+    public static void DFSAlgorithm(int CurrentNode, int Target) {
+        if (CurrentNode == graph.length) {
+            return;
+        }
+        if ( CurrentNode == Target ) {
+            System.out.println(Target);
+            ProgramTerminate = true;
+            return;
         }
 
         for ( int i = 0; i < size; i++ ) {
-            if ( !IsVisited[i] && graph[CurrentNode][i] != 0 ) {
-                BFSAlgorithm(i, Target);
-            }
-            if ( ProgramTerminate ) {
-                System.out.println(CurrentNode);
-                break;
+            if ( !IsVisited[i] && graph[CurrentNode][i] == 1 ) {
+                DFSAlgorithm(i, Target);
+                if (ProgramTerminate) {
+                    System.out.println(CurrentNode);
+                }
             }
         }
     }
-
-
     public static void initialize() {
         graph[0][1] = 1;
         graph[0][3] = 1;
